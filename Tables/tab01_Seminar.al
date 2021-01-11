@@ -69,7 +69,7 @@ table 50101 "CSD Seminar"
             Caption = 'Comment';
             Editable = false;
             FieldClass = FlowField;
-            //CalcFormula=exist(semin)
+            CalcFormula = exist("CSD Seminar Comment Line" where("Table Name" = const("Seminar"), "No." = Field("No.")));
 
         }
         field(100; "Seminar Price"; Decimal)
@@ -120,6 +120,7 @@ table 50101 "CSD Seminar"
         Seminar: Record "CSD Seminar";
         GenProdPostGroup: Record "Gen. Product Posting Group";
         NoSeriesMgt: Codeunit NoSeriesManagement;
+        CommentLine: Record "CSD Seminar Comment Line";
 
     trigger OnInsert()
     begin
@@ -138,7 +139,10 @@ table 50101 "CSD Seminar"
 
     trigger OnDelete()
     begin
-
+        CommentLine.Reset();
+        CommentLine.SetRange("Table Name", CommentLine."Table Name"::Seminar);
+        CommentLine.SetRange("No.", "No.");
+        CommentLine.DeleteAll();
     end;
 
     trigger OnRename()
