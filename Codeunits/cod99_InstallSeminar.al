@@ -4,8 +4,9 @@ codeunit 50149 InstallSeminar
 
     trigger OnInstallAppPerCompany();
     begin
-        if SetupExists then
-            exit;
+        //if SetupExists then
+        //    exit;
+        if SeminarSetup.Get() then exit;
         InitSetup;
         CreateSeminar;
         CreateResources;
@@ -15,13 +16,10 @@ codeunit 50149 InstallSeminar
     var
         NoSerie: Record "No. Series";
         NoSerieLine: Record "No. Series Line";
-        SeminarSetup: Record "CSD Seminar Setup";
+        //SeminarSetup: Record "CSD Seminar Setup";
         SourceCodeSetup: Record "Source Code Setup";
         SourceCode: Record "Source Code";
     begin
-        SetupExists := SeminarSetup.get;
-        if SetupExists then
-            exit;
 
         SeminarSetup.init;
         if SeminarSetup.Insert then;
@@ -103,4 +101,5 @@ codeunit 50149 InstallSeminar
 
     var
         SetupExists: Boolean;
+        SeminarSetup: Record "CSD Seminar Setup";
 }
