@@ -1,62 +1,58 @@
 page 50102 "CSD Seminar List"
+// CSD1.00 - 2018-01-01 - D. E. Veloper
+// Chapter 5 - Lab 3-6
 {
-    PageType = List;
-    ApplicationArea = All;
-    UsageCategory = Lists;
-    SourceTable = "CSD Seminar";
     Caption = 'Seminar List';
+    PageType = List;
+    SourceTable = "CSD Seminar";
     Editable = false;
     CardPageId = 50101;
+    UsageCategory = Lists;
 
     layout
     {
-        area(Content)
+        area(content)
         {
-            repeater(GroupName)
+            repeater(Group)
             {
-                field("No."; Rec."No.")
+                field("No."; "No.")
                 {
                     ApplicationArea = All;
-
                 }
-                field(Name; Rec.Name)
+                field(Name; Name)
                 {
                     ApplicationArea = All;
-
                 }
-                field("Seminar Duration"; Rec."Seminar Duration")
+                field("Seminar Duration"; "Seminar Duration")
                 {
                     ApplicationArea = All;
-
                 }
-                field("Seminar Price"; Rec."Seminar Price")
+                field("Seminar Price"; "Seminar Price")
                 {
                     ApplicationArea = All;
-
                 }
-                field("Minimum Participants"; Rec."Minimum Participants")
+                field("Minimum Participants"; "Minimum Participants")
                 {
                     ApplicationArea = All;
-
                 }
-                field("Maximum Participants"; Rec."Maximum Participants")
+                field("Maximum Participants"; "Maximum Participants")
                 {
                     ApplicationArea = All;
-
                 }
             }
         }
-        area(Factboxes)
+        area(FactBoxes)
         {
             systempart("Links"; Links)
             {
-
+                ApplicationArea = All;
             }
-            systempart(Notes; Notes)
+            systempart("Notes"; Notes)
             {
-
+                ApplicationArea = All;
             }
         }
+
     }
 
     actions
@@ -67,10 +63,13 @@ page 50102 "CSD Seminar List"
             {
                 action("Co&mments")
                 {
-                    //RunObject
-                    //RunPageLink
+                    RunObject = page "CSD Seminar Comment Sheet";
+                    RunPageLink = "Table Name" = const (Seminar), "No." = field ("No.");
                     Image = Comment;
-                    ApplicationArea = all;
+                    Promoted = true;
+                    PromotedIsBig = true;
+                    PromotedOnly = true;
+                    ApplicationArea = All;
                 }
             }
         }

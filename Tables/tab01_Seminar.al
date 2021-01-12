@@ -1,107 +1,108 @@
 table 50101 "CSD Seminar"
+// CSD1.00 - 2018-01-01 - D. E. Veloper
+// Chapter 5 - Lab 3-2 & Lab 3-3 
 {
-    DataClassification = AccountData;
     Caption = 'Seminar';
-    LookupPageId = "CSD Seminar List";
-    DrillDownPageId = "CSD Seminar List";
 
     fields
     {
-        field(10; "No."; code[20])
+        field(10; "No."; Code[20])
         {
-            DataClassification = AccountData;
             Caption = 'No.';
-            trigger OnValidate()
+            DataClassification = AccountData;
+
+            trigger OnValidate();
             begin
                 if "No." <> xRec."No." then begin
                     SeminarSetup.Get();
-                    NoSeriesMgt.TestManual(SeminarSetup."Seminar Nos");
-                    "No Series" := '';
+                    NoSeriesMgt.TestManual(SeminarSetup."Seminar Nos.");
+                    "No. Series" := '';
                 end;
             end;
         }
-        field(20; "Name"; Text[50])
+        field(20; Name; Text[50])
         {
-            DataClassification = AccountData;
             Caption = 'Name';
-            trigger OnValidate()
+            DataClassification = AccountData;
+
+            trigger OnValidate();
             begin
-                if ("Search Name" = UpperCase(xRec.Name)) then begin
+                if ("Search Name" = UpperCase(xRec.Name)) or ("Search Name" = '') then
                     "Search Name" := Name;
-                end;
             end;
         }
         field(30; "Seminar Duration"; Decimal)
         {
-            DataClassification = AccountData;
             Caption = 'Seminar Duration';
             DecimalPlaces = 0 : 1;
+            DataClassification = AccountData;
         }
         field(40; "Minimum Participants"; Integer)
         {
-            DataClassification = AccountData;
             Caption = 'Minimum Participants';
+            DataClassification = AccountData;
         }
         field(50; "Maximum Participants"; Integer)
         {
-            DataClassification = AccountData;
             Caption = 'Maximum Participants';
-        }
-        field(60; "Search Name"; code[50])
-        {
             DataClassification = AccountData;
+        }
+        field(60; "Search Name"; Code[50])
+        {
             Caption = 'Search Name';
-        }
-        field(70; "Blocked"; Boolean)
-        {
             DataClassification = AccountData;
+        }
+        field(70; Blocked; Boolean)
+        {
             Caption = 'Blocked';
+            DataClassification = AccountData;
         }
         field(80; "Last Date Modified"; Date)
         {
-            DataClassification = AccountData;
             Caption = 'Last Date Modified';
             Editable = false;
+            DataClassification = AccountData;
         }
-        field(90; "Comment"; Boolean)
+        field(90; Comment; Boolean)
         {
-
             Caption = 'Comment';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = exist("CSD Seminar Comment Line" where("Table Name" = const("Seminar"), "No." = Field("No.")));
-
+            CalcFormula = exist ("CSD Seminar Comment Line" where ("Table Name" = filter ("Seminar"), "No." = Field ("No.")));
         }
         field(100; "Seminar Price"; Decimal)
         {
-            DataClassification = AccountData;
             Caption = 'Seminar Price';
-            AutoFormatType = 1;
+            DataClassification = AccountData;
         }
         field(110; "Gen. Prod. Posting Group"; code[10])
         {
-            DataClassification = AccountData;
             Caption = 'Gen. Prod. Posting Group';
             TableRelation = "Gen. Product Posting Group";
-            trigger OnValidate()
+            DataClassification = AccountData;
+
+            trigger OnValidate();
             begin
-                if GenProdPostGroup.ValidateVatProdPostingGroup(GenProdPostGroup, "Gen. Prod. Posting Group") then
-                    "VAT Prod Posting Group" := GenProdPostGroup."Def. VAT Prod. Posting Group";
+                if (xRec."Gen. Prod. Posting Group" <> "Gen. Prod. Posting Group") then begin
+                    if GenProdPostingGroup.ValidateVatProdPostingGroup(GenProdPostingGroup, "Gen. Prod. Posting Group") then
+                        Validate("VAT Prod. Posting Group", GenProdPostingGroup."Def. VAT Prod. Posting Group");
+                end;
             end;
         }
-        field(120; "VAT Prod Posting Group"; code[10])
+        field(120; "VAT Prod. Posting Group"; code[10])
         {
-            DataClassification = AccountData;
-            Caption = 'VAT Prod Posting Group';
+            Caption = 'VAT Prod. Posting Group';
             TableRelation = "VAT Product Posting Group";
-        }
-        field(130; "No Series"; code[10])
-        {
             DataClassification = AccountData;
-            Caption = 'No Series';
-            Editable = false;
-            TableRelation = "No. Series";
         }
+        field(130; "No. Series"; Code[10])
+        {
+            Editable = false;
+            Caption = 'No. Series';
+            TableRelation = "No. Series";
+            DataClassification = AccountData;
+        }
+
     }
 
     keys
@@ -110,34 +111,30 @@ table 50101 "CSD Seminar"
         {
             Clustered = true;
         }
-        key(SearchName; "Search Name")
-        {
-            //Clustered=true;
-        }
     }
+
     var
         SeminarSetup: Record "CSD Seminar Setup";
-        Seminar: Record "CSD Seminar";
-        GenProdPostGroup: Record "Gen. Product Posting Group";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         CommentLine: Record "CSD Seminar Comment Line";
+        Seminar: Record "CSD Seminar";
+        GenProdPostingGroup: Record "Gen. Product Posting Group";
+        NoSeriesMgt: Codeunit NoSeriesManagement;
 
-    trigger OnInsert()
+    trigger OnInsert();
     begin
         if "No." = '' then begin
-            SeminarSetup.Get();
-            SeminarSetup.TestField("Seminar Nos");
-            NoSeriesMgt.InitSeries(SeminarSetup."Seminar Nos", xRec."No Series", 0D, "No.", "No Series");
+            SeminarSetup.get();
+            SeminarSetup.TestField("Seminar Nos.");
+            NoSeriesMgt.InitSeries(SeminarSetup."Seminar Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
-
     end;
 
-    trigger OnModify()
+    trigger OnModify();
     begin
-        Rec."Last Date Modified" := Today;
+        "Last Date Modified" := Today();
     end;
 
-    trigger OnDelete()
+    trigger OnDelete();
     begin
         CommentLine.Reset();
         CommentLine.SetRange("Table Name", CommentLine."Table Name"::Seminar);
@@ -145,19 +142,22 @@ table 50101 "CSD Seminar"
         CommentLine.DeleteAll();
     end;
 
-    trigger OnRename()
+    trigger OnRename();
     begin
-        Rec."Last Date Modified" := Today;
+        "Last Date Modified" := Today;
     end;
 
-    procedure AssistEdit(): Boolean
-    var
+    procedure AssistEdit(): Boolean;
     begin
-        SeminarSetup.Get();
-        SeminarSetup.TestField("Seminar Nos");
-        if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Nos", xRec."No Series", "No Series") then begin
-            NoSeriesMgt.SetSeries("No.");
-            exit(true);
+        with Seminar do begin
+            Seminar := Rec;
+            SeminarSetup.get();
+            SeminarSetup.TestField("Seminar Nos.");
+            if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Nos.", xRec."No. Series", "No. Series") then begin
+                NoSeriesMgt.SetSeries("No.");
+                Rec := Seminar;
+                exit(true);
+            end;
         end;
     end;
 }

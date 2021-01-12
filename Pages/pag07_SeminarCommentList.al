@@ -1,12 +1,11 @@
-page 50106 "CSD Seminar Comment Sheet"
+page 50107 "CSD Seminar Comment List"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 // Chapter 5 - Lab 2-2
 {
-    Caption = 'Seminar Comment Sheet';
+    Caption = 'Seminar Comment List';
     PageType = List;
     SourceTable = "CSD Seminar Comment Line";
-    AutoSplitKey = true;
-    UsageCategory = Lists;
+    Editable = false;
 
     layout
     {
@@ -30,8 +29,4 @@ page 50106 "CSD Seminar Comment Sheet"
             }
         }
     }
-    trigger OnNewRecord(BelowxRec: Boolean)
-    begin
-        Rec.SetupNewLine();
-    end;
 }
