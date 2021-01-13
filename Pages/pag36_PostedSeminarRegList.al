@@ -18,35 +18,35 @@ page 50136 "CSD Posted Seminar Reg. List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Starting Date"; "Starting Date")
+                field("Starting Date"; Rec."Starting Date")
                 {
                     ApplicationArea = All;
                 }
-                field("Seminar No."; "Seminar No.")
+                field("Seminar No."; Rec."Seminar No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Seminar Name"; "Seminar Name")
+                field("Seminar Name"; Rec."Seminar Name")
                 {
                     ApplicationArea = All;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = All;
                 }
-                field(Duration; Duration)
+                field(Duration; Rec.Duration)
                 {
                     ApplicationArea = All;
                 }
-                field("Maximum Participants"; "Maximum Participants")
+                field("Maximum Participants"; Rec."Maximum Participants")
                 {
                     ApplicationArea = All;
                 }
-                field("Room Resource No."; "Room Resource No.")
+                field("Room Resource No."; Rec."Room Resource No.")
                 {
                     ApplicationArea = All;
                 }
@@ -56,7 +56,7 @@ page 50136 "CSD Posted Seminar Reg. List"
         {
             part("Seminar Details FactBox"; "CSD Seminar Details FactBox")
             {
-                SubPageLink = "No." = Field ("Seminar No.");
+                SubPageLink = "No." = Field("Seminar No.");
                 ApplicationArea = All;
             }
             systempart("Links"; Links)
@@ -82,8 +82,8 @@ page 50136 "CSD Posted Seminar Reg. List"
                     Caption = 'Co&mments';
                     Image = Comment;
                     RunObject = page "CSD Seminar Comment List";
-                    RunPageLink = "No." = Field ("No.");
-                    RunPageView = where ("Table Name" = const ("Posted Seminar Registration"));
+                    RunPageLink = "No." = Field("No.");
+                    RunPageView = where("Table Name" = const("Posted Seminar Registration"));
                     ApplicationArea = All;
                 }
                 action("&Charges")
@@ -91,7 +91,7 @@ page 50136 "CSD Posted Seminar Reg. List"
                     Caption = '&Charges';
                     Image = Costs;
                     RunObject = Page 50139;
-                    RunPageLink = "Document No." = Field ("No.");
+                    RunPageLink = "Document No." = Field("No.");
                     ApplicationArea = All;
                 }
             }

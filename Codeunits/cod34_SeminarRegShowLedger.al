@@ -6,7 +6,7 @@ codeunit 50134 "CSD SeminarRegShowLedger"
 
     trigger OnRun();
     begin
-        SeminarLedgerEntry.SETRANGE("Entry No.", "From Entry No.", "To Entry No.");
+        SeminarLedgerEntry.SETRANGE("Entry No.", Rec."From Entry No.", Rec."To Entry No.");
         page.Run(Page::"CSD Seminar Ledger Entries", SeminarLedgerEntry);
     end;
 

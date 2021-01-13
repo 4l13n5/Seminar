@@ -1,6 +1,6 @@
 page 50113 "CSD Seminar Registration List"
 {
-     // CSD1.00 - 2018-01-01 - D. E. Veloper
+    // CSD1.00 - 2018-01-01 - D. E. Veloper
     //   Chapter 6 - Lab 3
     //     - Created new page
     //   Chapter 7 - Lab 5-8
@@ -11,7 +11,7 @@ page 50113 "CSD Seminar Registration List"
     Editable = false;
     PageType = List;
     SourceTable = "CSD Seminar Reg. Header";
-    UsageCategory=lists;
+    UsageCategory = lists;
 
     layout
     {
@@ -19,35 +19,35 @@ page 50113 "CSD Seminar Registration List"
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Starting Date";"Starting Date")
+                field("Starting Date"; Rec."Starting Date")
                 {
                     ApplicationArea = All;
                 }
-                field("Seminar No.";"Seminar No.")
+                field("Seminar No."; Rec."Seminar No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Seminar Name";"Seminar Name")
+                field("Seminar Name"; Rec."Seminar Name")
                 {
                     ApplicationArea = All;
                 }
-                field(Status;Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = All;
                 }
-                field(Duration;Duration)
+                field(Duration; Rec.Duration)
                 {
                     ApplicationArea = All;
                 }
-                field("Maximum Participants";"Maximum Participants")
+                field("Maximum Participants"; Rec."Maximum Participants")
                 {
                     ApplicationArea = All;
                 }
-                field("Room Resource No.";"Room Resource No.")
+                field("Room Resource No."; Rec."Room Resource No.")
                 {
                     ApplicationArea = All;
                 }
@@ -55,11 +55,11 @@ page 50113 "CSD Seminar Registration List"
         }
         area(factboxes)
         {
-            systempart("Links";Links)
+            systempart("Links"; Links)
             {
                 ApplicationArea = All;
             }
-            systempart("Notes";Notes)
+            systempart("Notes"; Notes)
             {
                 ApplicationArea = All;
             }
@@ -78,8 +78,8 @@ page 50113 "CSD Seminar Registration List"
                     Caption = 'Co&mments';
                     Image = Comment;
                     RunObject = Page 50106;
-                    RunPageLink = "No."=Field("No.");
-                    RunPageView = where("Table Name"=Const("Seminar Registration"));
+                    RunPageLink = "No." = Field("No.");
+                    RunPageView = where("Table Name" = Const("Seminar Registration"));
                     ApplicationArea = All;
                 }
                 action("&Charges")
@@ -87,18 +87,18 @@ page 50113 "CSD Seminar Registration List"
                     Caption = '&Charges';
                     Image = Costs;
                     RunObject = Page 50124;
-                    RunPageLink = "Document No."=Field("No.");
+                    RunPageLink = "Document No." = Field("No.");
                     ApplicationArea = All;
                 }
                 action("&Post")
                 {
-                    Caption='&Post';
-                    Image=PostDocument;
-                    Promoted=true;
-                    PromotedIsBig=true;
-                    PromotedCategory=Process;
-                    ShortcutKey=F9;
-                    RunObject=codeunit "CSD Seminar-Post (Yes/No)";
+                    Caption = '&Post';
+                    Image = PostDocument;
+                    Promoted = true;
+                    PromotedIsBig = true;
+                    PromotedCategory = Process;
+                    ShortcutKey = F9;
+                    RunObject = codeunit "CSD Seminar-Post (Yes/No)";
                     ApplicationArea = All;
                 }
             }

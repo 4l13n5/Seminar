@@ -15,84 +15,84 @@ page 50121 "CSD Seminar Ledger Entries"
         {
             repeater(Group)
             {
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = All;
                 }
-                field("Document No."; "Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     Visible = false;
                     ApplicationArea = All;
                 }
-                field("Entry Type"; "Entry Type")
+                field("Entry Type"; Rec."Entry Type")
                 {
                     ApplicationArea = All;
                 }
-                field("Seminar No."; "Seminar No.")
+                field("Seminar No."; Rec."Seminar No.")
                 {
                     ApplicationArea = All;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = All;
                 }
-                field("Bill-to Customer No."; "Bill-to Customer No.")
+                field("Bill-to Customer No."; Rec."Bill-to Customer No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Charge Type"; "Charge Type")
+                field("Charge Type"; Rec."Charge Type")
                 {
                     ApplicationArea = All;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = All;
                 }
-                field(Quantity; Quantity)
+                field(Quantity; Rec.Quantity)
                 {
                     ApplicationArea = All;
                 }
-                field("Unit Price"; "Unit Price")
+                field("Unit Price"; Rec."Unit Price")
                 {
                     ApplicationArea = All;
                 }
-                field("Total Price"; "Total Price")
+                field("Total Price"; Rec."Total Price")
                 {
                     ApplicationArea = All;
                 }
-                field(Chargeable; Chargeable)
+                field(Chargeable; Rec.Chargeable)
                 {
                     ApplicationArea = All;
                 }
-                field("Participant Contact No."; "Participant Contact No.")
+                field("Participant Contact No."; Rec."Participant Contact No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Participant Name"; "Participant Name")
+                field("Participant Name"; Rec."Participant Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Instructor Resource No."; "Instructor Resource No.")
+                field("Instructor Resource No."; Rec."Instructor Resource No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Room Resource No."; "Room Resource No.")
+                field("Room Resource No."; Rec."Room Resource No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Starting Date"; "Starting Date")
+                field("Starting Date"; Rec."Starting Date")
                 {
                     ApplicationArea = All;
                 }
-                field("Seminar Registration No."; "Seminar Registration No.")
+                field("Seminar Registration No."; Rec."Seminar Registration No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Entry No."; "Entry No.")
+                field("Entry No."; Rec."Entry No.")
                 {
                     ApplicationArea = All;
                 }

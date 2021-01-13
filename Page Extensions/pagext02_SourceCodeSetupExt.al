@@ -16,7 +16,7 @@ pageextension 50102 "CSD SourceCodeExt" extends "Source Code Setup"
         }
         addfirst(SeminarGroup)
         {
-            field(Seminar; "CSD Seminar")
+            field(Seminar; Rec."CSD Seminar")
             {
                 ApplicationArea = All;
             }
